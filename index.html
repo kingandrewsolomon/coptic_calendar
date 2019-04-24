@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="css/styling.css">
 </head>
 
 <body>
@@ -16,111 +16,59 @@
         <div class="container col-md-4">
             <h3 id="Time">12:00:00</h3>
         </div>
-        <div class="card">
+        <div class="card text-center">
             <h3 class="card-header" id="monthAndYear"></h3>
-            <table class="table table-bordered table-responsive-sm" id="calendar">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
+            <div id="table-container">
+                <table class="table table-bordered table-responsive-sm" id="calendar">
+                    <thead>
+                        <tr>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>S</th>
+                        </tr>
+                    </thead>
 
-                <tbody id="calendar-body">
+                    <tbody id="calendar-body">
 
-                </tbody>
-            </table>
-
-            <div class="form-inline">
-
-                <button class="btn btn-outline-primary col-sm-6" id="previous" onclick="previous()">Previous</button>
-
-                <button class="btn btn-outline-primary col-sm-6" id="next" onclick="next()">Next</button>
+                    </tbody>
+                </table>
             </div>
-            <br />
-            <form class="form-inline">
-                <label class="lead mr-2 ml-2" for="month">Jump To: </label>
-                <select class="form-control col-sm-4" name="month" id="month" onchange="jump()">
-                    <option value=0>ⲑⲱⲩⲧ</option>
-                    <option value=1>ⲡⲁⲟⲡⲓ</option>
-                    <option value=2>ⲁⲑⲱⲣ</option>
-                    <option value=3>ⲭⲟⲓⲁⲭ</option>
-                    <option value=4>ⲧⲱⲃⲓ</option>
-                    <option value=5>ⲙⲉϣⲓⲣ</option>
-                    <option value=6>ⲡⲁⲣⲉⲙⲝⲁⲧ</option>
-                    <option value=7>ⲡⲁⲣⲙⲟⲩⲑⲓ</option>
-                    <option value=8>ⲡⲁϣⲟⲛⲥ</option>
-                    <option value=9>ⲡⲁⲟⲛⲓ</option>
-                    <option value=10>ⲉⲡⲓⲡ</option>
-                    <option value=11>ⲙⲉⲥⲱⲣⲓ</option>
-                    <option value=12>ⲡⲓⲕⲟⲯϫⲓ ⲛ̀ⲁ̀ⲃⲟⲧ</option>
-
-                </select>
-
-
-                <label for="year"></label><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
-                    <option value=1711>1711</option>
-                    <option value=1712>1712</option>
-                    <option value=1713>1713</option>
-                    <option value=1714>1714</option>
-                    <option value=1715>1715</option>
-                    <option value=1716>1716</option>
-                    <option value=1717>1717</option>
-                    <option value=1718>1718</option>
-                    <option value=1719>1719</option>
-                    <option value=2020>2020</option>
-                    <option value=1721>1721</option>
-                    <option value=1722>1722</option>
-                    <option value=1723>1723</option>
-                    <option value=1724>1724</option>
-                    <option value=1725>1725</option>
-                    <option value=1726>1726</option>
-                    <option value=1727>1727</option>
-                    <option value=1728>1728</option>
-                    <option value=1729>1729</option>
-                    <option value=1730>1730</option>
-                    <option value=1731>1731</option>
-                    <option value=1732>1732</option>
-                    <option value=1733>1733</option>
-                    <option value=1734>1734</option>
-                    <option value=1735>1735</option>
-                    <option value=1736>1736</option>
-                    <option value=1737>1737</option>
-                    <option value=1738>1738</option>
-                    <option value=1739>1739</option>
-                    <option value=1740>1740</option>
-                    <option value=1741>1741</option>
-                    <option value=1742>1742</option>
-                    <option value=1743>1743</option>
-                    <option value=1744>1744</option>
-                    <option value=1745>1745</option>
-                    <option value=1746>1746</option>
-                    <option value=1747>1747</option>
-                    <option value=1748>1748</option>
-                    <option value=1749>1749</option>
-                    <option value=1750>1750</option>
-                </select></form>
+            <div class="form-inline">
+                <button class="btn btn-outline-primary col-sm-4" id="previous" onclick="previous()">Previous</button>
+                <button class="btn btn-outline-primary col-sm-4" id="next" onclick="toToday()">Today</button>
+                <button class="btn btn-outline-primary col-sm-4" id="next" onclick="next()">Next</button>
+            </div>
         </div>
     </div>
-    <!--<button name="jump" onclick="jump()">Go</button>-->
-    <script src="coptic_epoch_calculator.js"></script>
-    <script src="calendar.js"></script>
+    <div class="modal fade" id="myModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="event-modal-Title">Events</h1>
+                </div>
+                <div class="modal-body" id="events">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Optional JavaScript for bootstrap -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
-
+    <script src="js/BaseCalendar.js"></script>
+    <script src="js/Calendar.js"></script>
+    <script src="js/CDate.js"></script>
+    <script src="js/GregorianCalendar.js"></script>
+    <script src="js/CopticCalendar.js"></script>
+    <script src="js/events.js"></script>
+    <script src="js/calendarMaker.js"></script>
 </body>
 
 </html>
