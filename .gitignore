@@ -1,5 +1,6 @@
 .vscode
 .DS_Store
+.jshintrc
 /NativeCalendar
 /jquery.calendars.package-2.1.0
 /caleandar-master
