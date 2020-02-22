@@ -91,17 +91,17 @@ class CalendarState extends State<Calendar> {
   void _buildCalendar() {
     var date = 1;
     month = calendar.inEnglish
-        ? calendar.getEnglishMonth(widget.month)
-        : calendar.getMonth(widget.month);
+        ? calendar.getEnglishMonth(widget.month - 1)
+        : calendar.getMonth(widget.month - 1);
     year = widget.year;
-    var firstDay =
+    int firstDay =
         calendar.dayOfWeek(widget.year, month: widget.month, day: date);
     calendarRows = new List();
+    int daysInMonth = calendar.daysInMonth(widget.year, month: widget.month);
     for (var i = 0; i < 6; i++) {
       TableRow row = new TableRow(children: []);
       for (var j = 0; j < 7; j++) {
-        if (i == 0 && j < firstDay ||
-            date > calendar.daysInMonth(widget.year, month: widget.month)) {
+        if (i == 0 && j < firstDay || date > daysInMonth) {
           TableCell cell = _makeCell();
           row.children.add(cell);
         } else {

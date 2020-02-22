@@ -696,10 +696,7 @@ List<List<String>> synax = [
   [
     'The Departure of the Righteous Joachim, The Lord Christ Grandfather.',
     'The Departure of St. Macrobius.',
-    'The Departure of Sts. Agapius, Theodora, and Metruf.',
-    'He gave them a good and sweet fruit',
-    'Virgin was three years old',
-    'seventh day of the blessed month of Tubah'
+    'The Departure of Sts. Agapius, Theodora, and Metruf.'
   ],
   [
     'The Martyrdom of the Holy Virgins: Agape, Eirene, and Shiona.',

@@ -1,19 +1,20 @@
 import 'package:coptic_flutter_app/BaseCalendar.dart';
 import 'package:coptic_flutter_app/CDate.dart';
+import 'package:coptic_flutter_app/CustomDate.dart';
 
 Map<String, int> months = {
-  'January': 1,
-  'February': 2,
-  'March': 3,
-  'April': 4,
-  'May': 5,
-  'June': 6,
-  'July': 7,
-  'August': 8,
-  'September': 9,
-  'October': 10,
-  'November': 11,
-  'December': 12,
+  'January': 0,
+  'February': 1,
+  'March': 2,
+  'April': 3,
+  'May': 4,
+  'June': 5,
+  'July': 6,
+  'August': 7,
+  'September': 8,
+  'October': 9,
+  'November': 10,
+  'December': 11,
 };
 
 List<int> _parse(String eventDate) {
@@ -29,5 +30,5 @@ List<int> _parse(String eventDate) {
 CDate getEventDate(
     BaseCalendar calendar, Map<String, String> evt, String period) {
   List<int> t = _parse(evt[period]);
-  return calendar.fromJSDate(new DateTime(t[0], t[1], t[2]));
+  return calendar.fromCustomDate(new CustomDate(t[0], t[1], t[2]));
 }

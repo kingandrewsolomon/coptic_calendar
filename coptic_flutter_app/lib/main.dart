@@ -45,11 +45,11 @@ class _MyHomePageState extends State<MyHomePage>
   previous(BaseCalendar calendar) {
     setState(() {
       if (calendar == CopticCalendar()) {
-        year = (currentMonth == 0) ? year - 1 : year;
-        currentMonth = (currentMonth == 0) ? 12 : currentMonth - 1;
+        year = (currentMonth == 1) ? year - 1 : year;
+        currentMonth = (currentMonth == 1) ? 13 : currentMonth - 1;
       } else {
-        year = (currentMonth == 0) ? year - 1 : year;
-        currentMonth = (currentMonth == 0) ? 11 : currentMonth - 1;
+        year = (currentMonth == 1) ? year - 1 : year;
+        currentMonth = (currentMonth == 1) ? 12 : currentMonth - 1;
       }
     });
   }
@@ -67,19 +67,12 @@ class _MyHomePageState extends State<MyHomePage>
   next(BaseCalendar calendar) {
     setState(() {
       if (calendar == CopticCalendar()) {
-        year = (currentMonth + 1 == 13) ? year + 1 : year;
-        currentMonth = currentMonth + 1 == 13 ? 0 : currentMonth + 1;
+        year = (currentMonth == 13) ? year + 1 : year;
+        currentMonth = currentMonth + 1 == 14 ? 1 : currentMonth + 1;
       } else {
-        year = (currentMonth + 1 == 12) ? year + 1 : year;
-        currentMonth = currentMonth + 1 == 12 ? 0 : currentMonth + 1;
+        year = (currentMonth == 12) ? year + 1 : year;
+        currentMonth = currentMonth + 1 == 13 ? 1 : currentMonth + 1;
       }
-    });
-  }
-
-  nextCoptic() {
-    setState(() {
-      year = (currentMonth + 1 == 14) ? year + 1 : year;
-      currentMonth = currentMonth + 1 == 14 ? 0 : currentMonth + 1;
     });
   }
 
@@ -89,7 +82,6 @@ class _MyHomePageState extends State<MyHomePage>
     calendar = ParentCalendar.of(context).calendar;
     selectedDate = ParentCalendar.of(context).selectedDate;
 
-    // CDate today = calendar.today();
     currentMonth = selectedDate.month();
     year = selectedDate.year();
   }
@@ -104,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   String gregorianDate() {
     CDate sD = ParentCalendar.of(context).selectedDate ?? calendar.today();
-    CDate gDate = gregorian.fromJD(sD.toJD());
+    CDate gDate = gregorian.convert(sD);
     String month = gregorian.getMonth(gDate.month() - 1);
     int day = gDate.day();
     int year = gDate.year();
@@ -112,9 +104,9 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   String copticDate() {
-    CDate sD = ParentCalendar.of(context).selectedDate ?? calendar.today();
-    CDate cDate = coptic.fromJD(sD.toJD());
-    String month = coptic.getEnglishMonth(cDate.month());
+    CDate sD = ParentCalendar.of(context).selectedDate;
+    CDate cDate = coptic.convert(sD);
+    String month = coptic.getEnglishMonth(cDate.month() - 1);
     int day = cDate.day();
     int year = cDate.year();
     return '$month $day, $year';
@@ -218,7 +210,8 @@ class _MyHomePageState extends State<MyHomePage>
                             ),
                             onTap: () {
                               inherited.changeCalendar(coptic);
-                              inherited.changeSelectedDate(coptic.today());
+                              inherited.changeSelectedDate(
+                                  coptic.convert(selectedDate));
                             },
                           ),
                           ListTile(
@@ -230,7 +223,8 @@ class _MyHomePageState extends State<MyHomePage>
                             ),
                             onTap: () {
                               inherited.changeCalendar(gregorian);
-                              inherited.changeSelectedDate(gregorian.today());
+                              inherited.changeSelectedDate(
+                                  gregorian.convert(selectedDate));
                             },
                           ),
                         ],

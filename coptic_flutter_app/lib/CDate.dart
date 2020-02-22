@@ -1,3 +1,5 @@
+import 'CustomDate.dart';
+
 class CDate {
   var _calendar;
   int _year;
@@ -15,16 +17,16 @@ class CDate {
     return _calendar.newDate((year == null ? this : year), month, day);
   }
 
-  int year({year}) {
-    return (year == null ? this._year : this.set(year, 'y'));
+  int year() {
+    return this._year;
   }
 
-  int month({month}) {
-    return (month == null ? this._month : this.set(month, 'm'));
+  int month() {
+    return this._month;
   }
 
-  int day({day}) {
-    return (day == null ? this._day : this.set(day, 'd'));
+  int day() {
+    return this._day;
   }
 
   date(year, month, day) {
@@ -103,11 +105,11 @@ class CDate {
     return this._calendar.fromJD(jd);
   }
 
-  toJSDate() {
-    return this._calendar.toJSDate(this);
+  toCustomDate() {
+    return this._calendar.toCustomDate(this);
   }
 
-  fromJSDate(jsd) {
-    return this._calendar.fromJSDate(jsd);
+  fromCustomDate(CustomDate cd) {
+    return this._calendar.fromCustomDate(cd);
   }
 }

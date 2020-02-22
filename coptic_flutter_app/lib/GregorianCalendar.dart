@@ -1,4 +1,5 @@
 import 'package:coptic_flutter_app/BaseCalendar.dart';
+import 'package:coptic_flutter_app/CustomDate.dart';
 import 'CDate.dart';
 import 'dart:core';
 
@@ -31,10 +32,10 @@ class GregorianCalendar extends BaseCalendar {
     ];
   }
 
-  leapYear(year) {
+  bool leapYear(year) {
     var date = this.validate(year, this.minMonth, this.minDay);
     year = date.year() + (date.year() < 0 ? 1 : 0);
-    return year % 4 == 0 && (year % 100 != 0 && year % 400 == 0);
+    return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
   }
 
   weekOfYear(year, month, day) {
@@ -46,16 +47,16 @@ class GregorianCalendar extends BaseCalendar {
 
   daysInMonth(year, {month}) {
     var date = this.validate(year, month, this.minDay);
-    return this.daysPerMonth[date.month()] +
+    return this.daysPerMonth[date.month() - 1] +
         (date.month() == 2 && this.leapYear(date.year()) ? 1 : 0);
   }
 
-  weekDay(year, month, day) {
-    var wday = this.dayOfWeek(year, month: month, day: day);
+  bool weekDay(year, month, day) {
+    int wday = this.dayOfWeek(year, month: month, day: day);
     return (wday == 0 ? 7 : wday) < 6;
   }
 
-  toJD(year, {month, day}) {
+  double toJD(year, {month, day}) {
     var date = this.validate(year, month, day);
     year = date.year();
     month = date.month();
@@ -77,32 +78,29 @@ class GregorianCalendar extends BaseCalendar {
   }
 
   fromJD(jd) {
-    var z = (jd + 0.5).floor();
-    var a = ((z - 1867216.25) / 36524.25).floor();
+    int z = (jd + 0.5).floor();
+    int a = ((z - 1867216.25) / 36524.25).floor();
     a = z + 1 + a - (a / 4).floor();
-    var b = a + 1524;
-    var c = ((b - 122.1) / 365.25).floor();
-    var d = (365.25 * c).floor();
-    var e = ((b - d) / 30.6001).floor();
-    var day = b - d - (e * 30.6001).floor();
-    var month = e - (e > 13.5 ? 13 : 1);
-    var year = c - (month > 2.5 ? 4716 : 4715);
+    int b = a + 1524;
+    int c = ((b - 122.1) / 365.25).floor();
+    int d = (365.25 * c).floor();
+    int e = ((b - d) / 30.6001).floor();
+    int day = b - d - (e * 30.6001).floor();
+    int month = e - (e > 13.5 ? 13 : 1);
+    int year = c - (month > 2.5 ? 4716 : 4715);
     if (year <= 0) {
       year--;
     }
     return this.newDate(year, month, day);
   }
 
-  DateTime toJSDate(year, month, day) {
+  CustomDate toCustomDate(year, month, day) {
     var date = this.validate(year, month, day);
-    print(date.month());
-    var jsd =
-        new DateTime(date.year(), date.month(), date.day(), 0, 0, 0, 0, 0);
-    return jsd;
+    return CustomDate(date.year(), date.month() - 1, date.day(), 0, 0, 0, 0, 0);
   }
 
-  CDate fromJSDate(jsd) {
-    return this.newDate(jsd.year, jsd.month, jsd.day);
+  CDate fromCustomDate(CustomDate cd) {
+    return this.newDate(cd.year, cd.month + 1, cd.day);
   }
 
   getEnglishMonth(int month) {

@@ -1,5 +1,10 @@
+import 'package:coptic_flutter_app/CopticCalendar.dart';
+import 'package:coptic_flutter_app/GregorianCalendar.dart';
+
 import 'CDate.dart';
 import 'dart:math';
+
+import 'CustomDate.dart';
 
 abstract class BaseCalendar {
   var firstMonth;
@@ -10,7 +15,7 @@ abstract class BaseCalendar {
   List<String> monthNames;
   String name;
 
-  newDate(year, month, day) {
+  CDate newDate(year, month, day) {
     if (year == null) return this.today();
     if (year is CDate) {
       day = year.day();
@@ -21,19 +26,14 @@ abstract class BaseCalendar {
   }
 
   CDate today() {
-    return this.fromJSDate(new DateTime.now());
+    return this.fromCustomDate(new CustomDate.now());
   }
 
-  fromJSDate(DateTime date);
+  fromCustomDate(CustomDate date);
 
   epoch(year) {
     var date = this.validate(year, this.minMonth, this.minDay);
     return (date.year() < 0 ? this.local.epochs[0] : this.local.epochs[1]);
-  }
-
-  formatYear(year) {
-    var date = this.validate(year, this.minMonth, this.minDay);
-    return (date.year() < 0 ? '-' : '') + date.year().abs();
   }
 
   num monthsInYear() {
@@ -58,11 +58,18 @@ abstract class BaseCalendar {
     return (this.leapYear(date) ? 366 : 365);
   }
 
-  leapYear(year);
+  bool leapYear(year);
 
-  dayOfYear(year, month, day) {
+  int dayOfYear(year, month, day) {
     var date = this.validate(year, month, day);
-    return (date.toJD() - this.newDate(date.year(), 0, 1).toJD()).floor();
+    CDate firstDay;
+    if (this.name == 'Coptic') {
+      firstDay = new CDate(this, date.year(), 1, 1);
+    } else {
+      var day = date.leapYear() ? 12 : 11;
+      firstDay = new CDate(this, date.year() - 1, 9, day);
+    }
+    return (date.toJD() - firstDay.toJD()).floor();
   }
 
   daysInWeek() {
@@ -162,18 +169,20 @@ abstract class BaseCalendar {
     return valid;
   }
 
-  toJSDate(year, month, day) {
+  CustomDate toCustomDate(year, month, day) {
     var date = this.validate(year, month, day);
-    return this.fromJD(this.toJD(date)).toJSDate();
+    var cc = new CopticCalendar();
+    return cc.fromJD(this.toJD(date)).toCustomDate();
+    // return CustomDate(date.year(), date.month(), date.day(), 0, 0, 0, 0, 0);
   }
 
   fromJD(j);
 
-  validate(year, month, day) {
+  CDate validate(year, month, day) {
     if (year is CDate) {
       return year;
     }
-    var date = this.newDate(year, month, day);
+    CDate date = this.newDate(year, month, day);
     return date;
   }
 
@@ -182,6 +191,10 @@ abstract class BaseCalendar {
   }
 
   getEnglishMonth(int month);
+
+  CDate convert(CDate date) {
+    return this.fromJD(date.toJD());
+  }
 
   bool operator ==(o) => this.name == o.name;
   int get hashCode => this.name.codeUnitAt(0);

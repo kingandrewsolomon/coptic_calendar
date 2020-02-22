@@ -1,9 +1,10 @@
 import 'package:coptic_flutter_app/BaseCalendar.dart';
 import 'package:coptic_flutter_app/CDate.dart';
+import 'package:coptic_flutter_app/CustomDate.dart';
 import 'GregorianCalendar.dart';
 
 class CopticCalendar extends BaseCalendar {
-  var gregorian;
+  GregorianCalendar gregorian;
   double jdEpoch;
   List daysPerMonth;
   List<String> monthNames;
@@ -22,7 +23,7 @@ class CopticCalendar extends BaseCalendar {
       ":wout",
       "Paopi",
       "A;or",
-      "<;oiak",
+      "<oiak",
       "Twbi",
       "Mesir",
       "Paremhat",
@@ -50,7 +51,7 @@ class CopticCalendar extends BaseCalendar {
     ];
   }
 
-  leapYear(year) {
+  bool leapYear(year) {
     var date = this.validate(year, this.minMonth, this.minDay);
     year = date.year() + (date.year() < 0 ? 1 : 0);
     return year % 4 == 3 || year % 4 == -1;
@@ -68,23 +69,23 @@ class CopticCalendar extends BaseCalendar {
 
   daysInMonth(year, {month}) {
     var date = this.validate(year, month, 1);
-    return this.daysPerMonth[date.month()] +
+    return this.daysPerMonth[date.month() - 1] +
         (date.month() == 13 && this.leapYear(date.year()) ? 1 : 0);
   }
 
-  weekDay(year, month, day) {
+  bool weekDay(year, month, day) {
     var wday = this.dayOfWeek(year, month: month, day: day);
     return (wday == 0 ? 7 : wday) < 6;
   }
 
   toJD(year, {month, day}) {
-    var date = this.validate(year, month, day);
+    CDate date = this.validate(year, month, day);
     year = date.year();
     if (year < 0) {
       year++;
     }
     return date.day() +
-        (date.month()) * 30 +
+        (date.month() - 1) * 30 +
         (year - 1) * 365 +
         (year / 4).floor() +
         this.jdEpoch -
@@ -104,8 +105,8 @@ class CopticCalendar extends BaseCalendar {
     return this.newDate(year, month, day);
   }
 
-  CDate fromJSDate(jsd) {
-    return this.fromJD(this.gregorian.fromJSDate(jsd).toJD());
+  CDate fromCustomDate(CustomDate cd) {
+    return this.fromJD(this.gregorian.fromCustomDate(cd).toJD());
   }
 
   String getMonth(int month) {

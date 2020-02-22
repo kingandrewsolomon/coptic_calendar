@@ -7,7 +7,7 @@ import 'CDate.dart';
 class ParentCalendar extends StatefulWidget {
   final Widget child;
   final BaseCalendar calendar = new CopticCalendar();
-  final CDate selectedDate = new CopticCalendar().today();
+  final CDate selectedDate = CopticCalendar().today();
 
   ParentCalendar({
     Key key,
