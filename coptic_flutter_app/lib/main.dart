@@ -1,12 +1,14 @@
-import 'package:coptic_flutter_app/BaseCalendar.dart';
-import 'package:coptic_flutter_app/CalendarWidget.dart';
-import 'package:coptic_flutter_app/EventsListWidget.dart';
-import 'package:coptic_flutter_app/GregorianCalendar.dart';
+import 'package:coptic_flutter_app/Widgets/CalendarWidget.dart';
+import 'package:coptic_flutter_app/Widgets/EventsListWidget.dart';
+
+import 'package:coptic_flutter_app/Calendars/BaseCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CopticCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/GregorianCalendar.dart';
 import 'package:coptic_flutter_app/ParentCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CDate.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'CopticCalendar.dart';
-import 'CDate.dart';
 
 void main() => runApp(MyApp());
 

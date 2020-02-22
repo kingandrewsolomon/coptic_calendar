@@ -1,5 +1,4 @@
-import 'package:coptic_flutter_app/CopticCalendar.dart';
-import 'package:coptic_flutter_app/GregorianCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CopticCalendar.dart';
 
 import 'CDate.dart';
 import 'dart:math';

@@ -1,8 +1,8 @@
-import 'package:coptic_flutter_app/BaseCalendar.dart';
-import 'package:coptic_flutter_app/CopticCalendar.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:coptic_flutter_app/Calendars/BaseCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CopticCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CDate.dart';
 
-import 'CDate.dart';
+import 'package:flutter/cupertino.dart';
 
 class ParentCalendar extends StatefulWidget {
   final Widget child;

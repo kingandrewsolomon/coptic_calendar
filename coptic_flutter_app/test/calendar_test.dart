@@ -5,10 +5,10 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:coptic_flutter_app/CDate.dart';
-import 'package:coptic_flutter_app/CopticCalendar.dart';
-import 'package:coptic_flutter_app/GregorianCalendar.dart';
-import 'package:coptic_flutter_app/CustomDate.dart';
+import 'package:coptic_flutter_app/Calendars/CDate.dart';
+import 'package:coptic_flutter_app/Calendars/CopticCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/GregorianCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CustomDate.dart';
 import 'package:coptic_flutter_app/synax.dart';
 
 import 'package:flutter_test/flutter_test.dart';

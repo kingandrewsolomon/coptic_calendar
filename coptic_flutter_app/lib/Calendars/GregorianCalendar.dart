@@ -1,5 +1,5 @@
-import 'package:coptic_flutter_app/BaseCalendar.dart';
-import 'package:coptic_flutter_app/CustomDate.dart';
+import 'package:coptic_flutter_app/Calendars/BaseCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/CustomDate.dart';
 import 'CDate.dart';
 import 'dart:core';
 

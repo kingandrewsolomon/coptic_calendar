@@ -1,12 +1,12 @@
-import 'package:coptic_flutter_app/BaseCalendar.dart';
-import 'package:coptic_flutter_app/CalendarCellWidget.dart';
+import 'package:coptic_flutter_app/Calendars/BaseCalendar.dart';
+import 'package:coptic_flutter_app/Widgets/CalendarCellWidget.dart';
 import 'package:coptic_flutter_app/ParentCalendar.dart';
 import 'package:coptic_flutter_app/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'CDate.dart';
-import 'events.dart';
+import 'package:coptic_flutter_app/Calendars/CDate.dart';
+import 'package:coptic_flutter_app/events.dart';
 
 class Calendar extends StatefulWidget {
   final int month;

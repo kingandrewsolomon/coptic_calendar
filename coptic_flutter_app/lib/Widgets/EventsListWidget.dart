@@ -1,11 +1,11 @@
-import 'package:coptic_flutter_app/BaseCalendar.dart';
+import 'package:coptic_flutter_app/Calendars/BaseCalendar.dart';
 import 'package:coptic_flutter_app/ParentCalendar.dart';
 import 'package:coptic_flutter_app/events.dart';
 import 'package:coptic_flutter_app/helper.dart';
 import 'package:coptic_flutter_app/synax.dart';
 import 'package:flutter/material.dart';
 
-import 'CDate.dart';
+import 'package:coptic_flutter_app/Calendars/CDate.dart';
 
 class EventsList extends StatefulWidget {
   EventsList({Key key}) : super(key: key);

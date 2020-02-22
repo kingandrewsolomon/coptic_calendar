@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'CDate.dart';
+import 'package:coptic_flutter_app/Calendars/CDate.dart';
 
 class CalendarDate extends StatefulWidget {
   final CDate date;
