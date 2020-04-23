@@ -33,13 +33,13 @@ class CalendarDateState extends State<CalendarDate> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.hasEvent) {
-      return Container(
-        child: MaterialButton(
-          onPressed: () {
-            widget.dateSelected(widget.date);
-          },
-          child: Column(children: [
+    return Container(
+      child: MaterialButton(
+        onPressed: () {
+          widget.dateSelected(widget.date);
+        },
+        child: Column(
+          children: <Widget>[
             Text(
               '${widget.date.day()}',
               textAlign: TextAlign.center,
@@ -47,28 +47,15 @@ class CalendarDateState extends State<CalendarDate> {
             Container(
               width: 10,
               height: 10,
-              decoration:
-                  BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: widget.hasEvent ? Colors.green : Colors.transparent,
+                  shape: BoxShape.circle),
             )
-          ]),
+          ],
         ),
-        color: widget.color,
-        height: 30,
-      );
-    } else {
-      return Container(
-        child: MaterialButton(
-          onPressed: () {
-            widget.dateSelected(widget.date);
-          },
-          child: Text(
-            '${widget.date.day()}',
-            textAlign: TextAlign.center,
-          ),
-        ),
-        color: widget.color,
-        height: 30,
-      );
-    }
+      ),
+      color: widget.color,
+      height: 30,
+    );
   }
 }

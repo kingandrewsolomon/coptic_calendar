@@ -15,7 +15,7 @@ class GregorianCalendar extends BaseCalendar {
     leapYear(year) {
         let date = this._validate(year, this.minMonth, this.minDay);
         year = date.year() + (date.year() < 0 ? 1 : 0);
-        return year % 4 == 0 && (year % 100 !== 0 && year % 400 == 0);
+        return year % 4 == 0 && (year % 100 !== 0 || year % 400 == 0);
     }
 
     weekOfYear(year, month, day) {
@@ -26,7 +26,7 @@ class GregorianCalendar extends BaseCalendar {
 
     daysInMonth(year, month) {
         let date = this._validate(year, month, this.minDay);
-        return this.daysPerMonth[date.month() - 1] + (date.month() == 2 && this.leapYear(date.year()) ? 1 : 0);
+        return this.daysPerMonth[date.month()] + (date.month() == 2 && this.leapYear(date.year()) ? 1 : 0);
     }
 
     weekDay(year, month, day) {

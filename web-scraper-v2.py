@@ -7,7 +7,7 @@ import json
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 
-chromedriver = "/Users/andrewsolomon/chromedriver"
+chromedriver = "/Users/123ad30/chromedriver"
 os.environ["webdriver.chrome.driver"] = chromedriver
 driver = webdriver.Chrome(chromedriver, options=options)
 

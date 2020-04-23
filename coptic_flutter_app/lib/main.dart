@@ -180,16 +180,6 @@ class _MyHomePageState extends State<MyHomePage>
                   else
                     inherited.calendar.inEnglish = true;
                 });
-
-                // Logic for changing calendar: Works pretty well //
-                /*if (inherited.calendar == CopticCalendar()) {
-                  inherited.changeCalendar(gregorian);
-                  inherited.changeSelectedDate(gregorian.today());
-                } else {
-                  inherited.changeCalendar(coptic);
-                  inherited.changeSelectedDate(coptic.today());
-                }*/
-                ////////////////////////////////////////////////////
               },
             ),
             GestureDetector(

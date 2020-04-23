@@ -25,7 +25,7 @@ class CDate {
     date(year, month, day) {
         if (!this._calendar.isValid(year, month, day)) {
             this._year = year;
-            this.month = month;
+            this._month = month;
             this._day = day;
             return this;
         }

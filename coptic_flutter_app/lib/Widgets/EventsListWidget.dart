@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 
 import 'package:coptic_flutter_app/Calendars/CDate.dart';
 
+import 'EventWidget.dart';
+
 class EventsList extends StatefulWidget {
   EventsList({Key key}) : super(key: key);
 
@@ -55,8 +57,12 @@ class EventsListState extends State<EventsList> {
         synax[calendar.dayOfYear(date.year(), date.month(), date.day())];
     for (String evt in synaxEvent) {
       c++;
-      events.add(new Container(
-        child: Text(evt),
+      // events.add(new Container(
+      //   child: Text(evt),
+      // ));
+      events.add(new Event(
+        title: evt,
+        description: "Enter Description Here",
       ));
     }
     return [c, e];
@@ -71,9 +77,12 @@ class EventsListState extends State<EventsList> {
     var pcalendar = ParentCalendar.of(context);
     var date = pcalendar.selectedDate;
     List count = buildLists(date);
+    // BouncingScrollPhysics bounce = new BouncingScrollPhysics();
+
     return Container(
       constraints: BoxConstraints(maxHeight: 340),
       child: ListView.builder(
+        physics: BouncingScrollPhysics(),
         itemCount: count[0],
         itemBuilder: (context, index) {
           if (index < count[1]) {
